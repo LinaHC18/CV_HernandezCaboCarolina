@@ -24,10 +24,10 @@ const translations = {
     'hero.contact': 'Contactar',
     'hero.portfolio': 'PORTFOLIO PERSONAL',
     'hero.sideNote': 'ARTE · CÓDIGO · JUEGO',
-    'scene.label': 'Ilustración pixel-art de un pequeño mundo de videojuegos',
+    'scene.label': 'Ilustración 3D de un entorno submarino',
     'scene.status': 'EN DESARROLLO',
-    'scene.canvas': 'Paisaje pixel-art con un personaje explorador',
-    'scene.caption': 'UN MUNDO POR CONSTRUIR',
+    'scene.image': 'Escena submarina 3D con un refugio, peces y coral',
+    'scene.caption': 'ARTE 3D · ENTORNO SUBMARINO',
     'about.label': '01 — PERFIL',
     'about.title': 'Ideas que se<br>pueden <em>jugar.</em>',
     'about.lead': 'Soy Carolina, artista y programadora en formación, con curiosidad por cada parte del proceso creativo.',
@@ -73,10 +73,10 @@ const translations = {
     'hero.contact': 'Get in touch',
     'hero.portfolio': 'PERSONAL PORTFOLIO',
     'hero.sideNote': 'ART · CODE · PLAY',
-    'scene.label': 'Pixel-art illustration of a small video game world',
+    'scene.label': '3D illustration of an underwater environment',
     'scene.status': 'IN DEVELOPMENT',
-    'scene.canvas': 'Pixel-art landscape with an explorer character',
-    'scene.caption': 'A WORLD TO BUILD',
+    'scene.image': '3D underwater scene with a shelter, fish, and coral',
+    'scene.caption': '3D ART · UNDERWATER ENVIRONMENT',
     'about.label': '01 — PROFILE',
     'about.title': 'Ideas you can<br><em>play.</em>',
     'about.lead': "I'm Carolina, an artist and programmer in training, curious about every part of the creative process.",
@@ -115,6 +115,9 @@ function setLanguage(language) {
   });
   document.querySelectorAll('[data-i18n-aria]').forEach((element) => {
     element.setAttribute('aria-label', dictionary[element.dataset.i18nAria]);
+  });
+  document.querySelectorAll('[data-i18n-alt]').forEach((element) => {
+    element.setAttribute('alt', dictionary[element.dataset.i18nAlt]);
   });
 
   document.title = dictionary['page.title'];
@@ -158,51 +161,3 @@ const contactEmail = [99, 97, 114, 111, 108, 105, 110, 97, 104, 99, 49, 49, 50, 
 document.querySelector('#contact-email').href = `mailto:${contactEmail}`;
 setLanguage('es');
 
-const canvas = document.querySelector('#pixel-scene');
-const context = canvas.getContext('2d');
-const pixel = 4;
-const colors = {
-  sky: '#cbb8df', cloud: '#f5eff9', far: '#9985ad', hill: '#755b8a', grass: '#59416f',
-  dirt: '#a27eb1', dirtShade: '#74527f', trunk: '#543d66', leaf: '#72548c', leafLight: '#a285bc',
-  water: '#8767a7', waterLight: '#d4bce8', character: '#d19cf0', skin: '#efc3a8', dark: '#352542', flower: '#ead6fa'
-};
-
-function rect(x, y, width, height, color) {
-  context.fillStyle = color;
-  context.fillRect(x * pixel, y * pixel, width * pixel, height * pixel);
-}
-
-function drawScene(time = 0) {
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  rect(0, 0, 80, 60, colors.sky);
-  rect(8, 8, 8, 2, colors.cloud); rect(6, 10, 12, 2, colors.cloud); rect(47, 13, 9, 2, colors.cloud); rect(45, 15, 13, 2, colors.cloud);
-  rect(55, 7, 5, 5, colors.flower);
-
-  rect(0, 27, 16, 5, colors.far); rect(12, 23, 18, 9, colors.far); rect(28, 27, 16, 5, colors.far);
-  rect(41, 22, 21, 10, colors.far); rect(59, 27, 21, 5, colors.far);
-  rect(0, 32, 80, 11, colors.hill); rect(0, 32, 10, 3, colors.grass); rect(23, 31, 18, 3, colors.grass); rect(55, 32, 25, 3, colors.grass);
-
-  rect(0, 43, 80, 17, colors.dirt); rect(0, 43, 80, 2, colors.grass);
-  rect(0, 51, 24, 9, colors.water); rect(0, 51, 24, 1, colors.waterLight);
-  rect(5, 54, 6, 1, colors.waterLight); rect(17, 57, 5, 1, colors.waterLight);
-  rect(27, 47, 2, 1, colors.dirtShade); rect(37, 55, 2, 1, colors.dirtShade); rect(69, 49, 3, 1, colors.dirtShade);
-
-  rect(12, 31, 2, 12, colors.trunk); rect(8, 25, 10, 7, colors.leaf); rect(10, 22, 6, 5, colors.leafLight); rect(7, 28, 3, 4, colors.leafLight);
-  rect(65, 30, 2, 13, colors.trunk); rect(61, 24, 10, 8, colors.leaf); rect(63, 21, 6, 5, colors.leafLight); rect(70, 27, 3, 4, colors.leafLight);
-  rect(32, 39, 3, 2, colors.flower); rect(56, 46, 2, 2, colors.flower); rect(74, 39, 2, 2, colors.flower);
-
-  const bounce = Math.sin(time / 360) > .85 ? 1 : 0;
-  const x = 43;
-  const y = 33 - bounce;
-  rect(x, y, 4, 3, colors.skin); rect(x - 1, y + 3, 6, 5, colors.character);
-  rect(x, y + 4, 2, 1, colors.dark); rect(x + 3, y + 4, 1, 1, colors.dark);
-  rect(x, y + 8, 2, 3, colors.dark); rect(x + 3, y + 8, 2, 3, colors.dark);
-  rect(x - 2, y + 4, 2, 3, colors.skin); rect(x + 5, y + 4, 2, 3, colors.skin);
-  rect(x - 1, y - 1, 6, 1, colors.dark); rect(x, y - 2, 4, 1, colors.dark);
-
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    window.requestAnimationFrame(drawScene);
-  }
-}
-
-drawScene();
