@@ -1,6 +1,13 @@
 const menuToggle = document.querySelector('.menu-toggle');
 const mainNav = document.querySelector('.main-nav');
 const languageButtons = document.querySelectorAll('[data-language]');
+const themeToggle = document.querySelector('#theme-toggle');
+
+try {
+  document.documentElement.dataset.theme = localStorage.getItem('cv-theme') === 'dark' ? 'dark' : 'light';
+} catch {
+  document.documentElement.dataset.theme = 'light';
+}
 
 const translations = {
   es: {
@@ -11,11 +18,16 @@ const translations = {
     'menu.close': 'Cerrar menú',
     'nav.label': 'Navegación principal',
     'nav.about': 'Sobre mí',
+    'nav.experience': 'Experiencia',
     'nav.tools': 'Herramientas',
     'nav.contact': 'Hablemos',
     'language.label': 'Seleccionar idioma',
     'language.spanish': 'Español',
     'language.english': 'Inglés',
+    'theme.toDark': 'Cambiar a tema oscuro',
+    'theme.toLight': 'Cambiar a tema claro',
+    'theme.dark': 'Oscuro',
+    'theme.light': 'Claro',
     'hero.availability': 'DISPONIBLE PARA NUEVOS PROYECTOS',
     'hero.artist': 'Artista de videojuegos',
     'hero.programmer': 'programadora',
@@ -40,11 +52,18 @@ const translations = {
     'about.location': 'Tu ciudad, España',
     'about.languagesLabel': 'IDIOMAS',
     'about.languages': 'Español · Inglés',
-    'toolkit.label': '02 — CAJA DE HERRAMIENTAS',
+    'experience.label': '02 — EXPERIENCIA',
+    'experience.title': 'Experiencia<br><em>profesional.</em>',
+    'experience.oneRole': 'Cocinera',
+    'experience.twoRole': 'Cocinera',
+    'experience.threeRole': 'Artista conceptual',
+    'experience.hospitality': 'HOSTELERÍA',
+    'experience.art': 'ARTE PARA VIDEOJUEGOS',
+    'toolkit.label': '03 — CAJA DE HERRAMIENTAS',
     'toolkit.title': 'Del píxel<br>al <em>prototipo.</em>',
     'toolkit.development': 'DESARROLLO',
     'toolkit.art': 'ARTE & DISEÑO',
-    'contact.label': '03 — SIGUIENTE NIVEL',
+    'contact.label': '04 — SIGUIENTE NIVEL',
     'contact.question': '¿TIENES UNA IDEA?',
     'contact.title': 'Hagamos algo<br><em>que se recuerde.</em>',
     'contact.emailLink': 'Enviar correo electrónico',
@@ -60,11 +79,16 @@ const translations = {
     'menu.close': 'Close menu',
     'nav.label': 'Main navigation',
     'nav.about': 'About me',
+    'nav.experience': 'Experience',
     'nav.tools': 'Tools',
     'nav.contact': "Let's talk",
     'language.label': 'Select language',
     'language.spanish': 'Spanish',
     'language.english': 'English',
+    'theme.toDark': 'Switch to dark theme',
+    'theme.toLight': 'Switch to light theme',
+    'theme.dark': 'Dark',
+    'theme.light': 'Light',
     'hero.availability': 'AVAILABLE FOR NEW PROJECTS',
     'hero.artist': 'Game artist',
     'hero.programmer': 'programmer',
@@ -89,11 +113,18 @@ const translations = {
     'about.location': 'Your city, Spain',
     'about.languagesLabel': 'LANGUAGES',
     'about.languages': 'Spanish · English',
-    'toolkit.label': '02 — TOOLKIT',
+    'experience.label': '02 — EXPERIENCE',
+    'experience.title': 'Professional<br><em>experience.</em>',
+    'experience.oneRole': 'Chef',
+    'experience.twoRole': 'Chef',
+    'experience.threeRole': 'Concept artist',
+    'experience.hospitality': 'HOSPITALITY',
+    'experience.art': 'VIDEO GAME ART',
+    'toolkit.label': '03 — TOOLKIT',
     'toolkit.title': 'From pixel<br>to <em>prototype.</em>',
     'toolkit.development': 'DEVELOPMENT',
     'toolkit.art': 'ART & DESIGN',
-    'contact.label': '03 — NEXT LEVEL',
+    'contact.label': '04 — NEXT LEVEL',
     'contact.question': 'HAVE AN IDEA?',
     'contact.title': "Let's make<br><em>something memorable.</em>",
     'contact.emailLink': 'Send an email',
@@ -102,6 +133,18 @@ const translations = {
     'footer.credit': 'DESIGNED AND BUILT BY CAROLINA HERNÁNDEZ CABO'
   }
 };
+
+function updateThemeToggle() {
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  const dictionary = translations[document.documentElement.lang] || translations.es;
+  const labelKey = isDark ? 'theme.toLight' : 'theme.toDark';
+
+  themeToggle.setAttribute('aria-pressed', String(isDark));
+  themeToggle.setAttribute('aria-label', dictionary[labelKey]);
+  themeToggle.title = dictionary[labelKey];
+  themeToggle.querySelector('.theme-icon').textContent = isDark ? '☼' : '☾';
+  themeToggle.querySelector('.theme-label').textContent = dictionary[isDark ? 'theme.light' : 'theme.dark'];
+}
 
 function setLanguage(language) {
   const dictionary = translations[language];
@@ -127,6 +170,7 @@ function setLanguage(language) {
   languageButtons.forEach((button) => {
     button.setAttribute('aria-pressed', String(button.dataset.language === language));
   });
+  updateThemeToggle();
 }
 
 menuToggle.addEventListener('click', () => {
@@ -152,6 +196,15 @@ languageButtons.forEach((button) => {
     menuToggle.setAttribute('aria-label', translations[document.documentElement.lang]['menu.open']);
     mainNav.classList.remove('is-open');
   });
+});
+
+themeToggle.addEventListener('click', () => {
+  const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = theme;
+  try {
+    localStorage.setItem('cv-theme', theme);
+  } catch {}
+  updateThemeToggle();
 });
 
 document.querySelector('#current-year').textContent = new Date().getFullYear();

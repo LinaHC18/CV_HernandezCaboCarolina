@@ -24,10 +24,14 @@
 		</button>
 		<nav class="main-nav" id="main-nav" aria-label="Navegación principal" data-i18n-aria="nav.label">
 			<a href="#sobre-mi" data-i18n="nav.about">Sobre mí</a>
+			<a href="#experiencia" data-i18n="nav.experience">Experiencia</a>
 			<div class="language-switch" role="group" aria-label="Seleccionar idioma" data-i18n-aria="language.label">
 				<button type="button" data-language="es" aria-label="Español" aria-pressed="true" data-i18n-aria="language.spanish">ES</button>
 				<button type="button" data-language="en" aria-label="Inglés" aria-pressed="false" data-i18n-aria="language.english">EN</button>
 			</div>
+			<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar a tema oscuro" title="Cambiar a tema oscuro" aria-pressed="false">
+				<span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">Oscuro</span>
+			</button>
 			<a href="#herramientas" data-i18n="nav.tools">Herramientas</a>
 			<a class="nav-contact" href="#contacto"><span data-i18n="nav.contact">Hablemos</span> <span aria-hidden="true">↗</span></a>
 		</nav>
@@ -44,7 +48,7 @@
 					<a class="button button-dark" href="#herramientas"><span data-i18n="hero.tools">Ver herramientas</span> <span aria-hidden="true">↓</span></a>
 					<a class="text-link" href="#contacto"><span data-i18n="hero.contact">Contactar</span> <span aria-hidden="true">↗</span></a>
 				</div>
-				<div class="hero-index"><span>01 / 03</span><span data-i18n="hero.portfolio">PORTFOLIO PERSONAL</span></div>
+				<div class="hero-index"><span>01 / 04</span><span data-i18n="hero.portfolio">PORTFOLIO PERSONAL</span></div>
 			</div>
 
 			<div class="scene-wrap" aria-label="Ilustración 3D de un entorno submarino" data-i18n-aria="scene.label">
@@ -77,9 +81,33 @@
 			</div>
 		</section>
 
+		<section class="experience section-wrap" id="experiencia" aria-labelledby="experience-title">
+			<div class="section-heading">
+				<p class="eyebrow" data-i18n="experience.label">02 — EXPERIENCIA</p>
+				<h2 id="experience-title" data-i18n-html="experience.title">Experiencia<br><em>profesional.</em></h2>
+			</div>
+			<ol class="experience-list">
+				<li>
+					<span class="experience-index">01</span>
+					<div class="experience-info"><h3 data-i18n="experience.oneRole">Cocinera</h3><p>BIBO Madrid</p></div>
+					<span class="experience-kind" data-i18n="experience.hospitality">HOSTELERÍA</span>
+				</li>
+				<li>
+					<span class="experience-index">02</span>
+					<div class="experience-info"><h3 data-i18n="experience.twoRole">Cocinera</h3><p>Hotel Barceló</p></div>
+					<span class="experience-kind" data-i18n="experience.hospitality">HOSTELERÍA</span>
+				</li>
+				<li>
+					<span class="experience-index">03</span>
+					<div class="experience-info"><h3 data-i18n="experience.threeRole">Artista conceptual</h3><p>Tiping Monke</p></div>
+					<span class="experience-kind" data-i18n="experience.art">ARTE PARA VIDEOJUEGOS</span>
+				</li>
+			</ol>
+		</section>
+
 		<section class="toolkit section-wrap" id="herramientas" aria-labelledby="toolkit-title">
 			<div class="toolkit-heading">
-				<p class="eyebrow" data-i18n="toolkit.label">02 — CAJA DE HERRAMIENTAS</p>
+				<p class="eyebrow" data-i18n="toolkit.label">03 — CAJA DE HERRAMIENTAS</p>
 				<h2 id="toolkit-title" data-i18n-html="toolkit.title">Del píxel<br>al <em>prototipo.</em></h2>
 			</div>
 			<div class="toolkit-groups">
@@ -89,7 +117,7 @@
 		</section>
 
 		<section class="contact section-wrap" id="contacto" aria-labelledby="contact-title">
-			<div class="contact-topline"><p class="eyebrow" data-i18n="contact.label">03 — SIGUIENTE NIVEL</p><span data-i18n="contact.question">¿TIENES UNA IDEA?</span></div>
+			<div class="contact-topline"><p class="eyebrow" data-i18n="contact.label">04 — SIGUIENTE NIVEL</p><span data-i18n="contact.question">¿TIENES UNA IDEA?</span></div>
 			<h2 id="contact-title" data-i18n-html="contact.title">Hagamos algo<br><em>que se recuerde.</em></h2>
 			<a class="contact-link" id="contact-email" aria-label="Enviar correo electrónico" data-i18n-aria="contact.emailLink"><span data-i18n="contact.emailLabel">Enviar correo</span><span class="contact-arrow" aria-hidden="true">↗</span></a>
 			<div class="contact-bottom"><span data-i18n="contact.socials">También puedes encontrarme en</span><div><a href="https://www.artstation.com/mikamiart28" target="_blank" rel="noreferrer">ARTSTATION ↗</a><a href="https://github.com/LinaHC18" target="_blank" rel="noreferrer">GITHUB ↗</a></div></div>
